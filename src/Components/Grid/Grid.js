@@ -16,7 +16,14 @@ class GridGame extends Component {
       super(props);
       this.state = {
         botMove: 0,
+        bot: 0,
       }
+    }
+
+    changeBotState = (bool) => {
+      this.setState({
+        bot: bool
+      })
     }
 
     getRandomInt(max) {
@@ -33,10 +40,16 @@ class GridGame extends Component {
     }
 
     gameChoice(choice) {
+      if (choice === 1)
+        choice = "rock"
+      if (choice === 2)
+        choice = "paper"
+      if (choice === 3)
+        choice = "scissors"
       this.botMove = this.getRandomInt(3);
 
-      console.log("props score 1 " + this.props.scorePlayer1)
-      console.log("props score 2 " + this.props.scorePlayer2)
+      //console.log("props score 1 " + this.props.scorePlayer1)
+      //console.log("props score 2 " + this.props.scorePlayer2)
       
       if ((this.botMove === 0 && choice === "paper") ||
           (this.botMove === 1 && choice === "scissors") ||
@@ -57,6 +70,7 @@ class GridGame extends Component {
 
     render() {
         return (
+          <div>
         <Row>
           <Col style={{position: 'absolute', left: '1%'}}>
           <Steps direction="vertical" current={this.props.scorePlayer1}>
@@ -66,15 +80,15 @@ class GridGame extends Component {
           </Steps>
           </Col>
           <Col className="gutter-row" span={6} style={styleLeft}>
-          { this.props.bot === false &&<Button icon style={styleButton} onClick={() => this.gameChoice("rock")}>
+            <Button icon style={styleButton} onClick={() => this.gameChoice("rock")}>
               Stone 
               <Icon name='hand rock outline' />
-            </Button> }
+            </Button>
             <Button icon style={styleButton} onClick={() => this.gameChoice("paper")}>
               <Icon name='hand paper outline' />
               paper
             </Button>
-            <Button icon style={styleButton} onClick={() => this.gameChoice("scissors")}>
+            <Button icon style={styleButton} onClick={() => this.gameChoice("scissors")} >
               <Icon name='hand scissors outline' />
                 scissors
             </Button>
@@ -101,6 +115,10 @@ class GridGame extends Component {
           </Steps>
           </Col>
         </Row>
+        <Button onClick={() => this.gameChoice(this.getRandomInt(3))}>
+                play as a bot
+        </Button>
+        </div>
         );
     }
 }
