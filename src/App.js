@@ -1,5 +1,4 @@
 import RestartButton from "./Components/Button/ButtonRestart"
-import BotButton from "./Components/Button/ButtonRestart"
 import React, { Component } from 'react';
 import GridGame from "./Components/Grid/Grid"
 import './App.css';
@@ -62,7 +61,6 @@ class App extends Component {
         <Footer style={{background: '#F5F5F5', marginLeft:'42%', top: '30%'}}>
           <div>
             {this.state.win === 1 && <label>You win</label>}
-            <BotButton label="bot" updateBot={this.changeBotState}/>
             <RestartButton label="restart"  updateScore={this.changeCurrentPlayerState} updateWinState={this.changeWinState}/>
             {this.state.lose === 1 && <label>You lose</label>}
           </div>
